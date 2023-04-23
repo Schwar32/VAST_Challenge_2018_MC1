@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hunter Schwartz</title>
+    <script type="text/javascript" src="D3/d3.v3.js"></script>
+    <link rel="stylesheet" type="text/css" href="Styles/styles.css" />
+  </head>
+  <body>
+    <div class="header-container">
+      <h1 class="title">VAST Challenge 2018 MC1</h1>
+      <h2 class="title">
+        Hunter Schwartz, Ethan Miller, Evan Swider, Lorenzo Semprevivo, Shane
+        Cleary
+      </h2>
+    </div>
+    <div class="hero-container">
+      <div class="filter-container" id="filter-container">
+        <h2 class="filters-header">Filters</h2>
+        <div class="date-filter-container" id="date-filter-container">
+          <input
+            type="date"
+            id="start"
+            name="start"
+            class="date-input"
+            value="1980-01-01"
+          />
+
+          <input
+            type="date"
+            id="end"
+            name="end"
+            class="date-input"
+            value="2020-01-01"
+          />
+        </div>
+        <div class="bird-filter-container" id="bird-filter-container"></div>
+      </div>
+      <div class="graph-container" id="graph-container"></div>
+      <div class="info-container">
+        <h2 class="filters-header">Data Information</h2>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="Scripts/graph.js"></script>
+</html>
