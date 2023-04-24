@@ -11,7 +11,7 @@ const DUMPSITE_X = 148;
 const DUMPSITE_Y = 159;
 const DUMPSITE_SIZE = 50;
 
-const RADIUS = 10;
+const RADIUS = 9;
 
 const BIRD_COLORS = {
   "Bent-beak Riffraff": "#9c27b0",
@@ -60,6 +60,9 @@ let birdFilters = {
   "Vermillion Trillian": true,
 };
 
+const TOOLTIP_X_OFFSET = 10;
+const TOOLTIP_Y_OFFSET = -45;
+
 let xScale = d3.scale
   .linear()
   .domain([MIN_X, MAX_X])
@@ -77,6 +80,15 @@ let svg = d3
   .attr("height", HEIGHT);
 
 function SetupFilters() {
+  var dumpsite = document.getElementById("dumpsite-checkbox");
+  dumpsite.onchange = (e) => {
+    if (e.currentTarget.checked) {
+      ShowDumpsite();
+    } else {
+      HideDumpsite();
+    }
+  };
+
   var startDate = document.getElementById("start");
   var endDate = document.getElementById("end");
   startDate.onchange = (e) => {
@@ -125,6 +137,17 @@ function ReadCSV() {
       ]);
     }
 
+    var tooltip = d3
+      .select("#graph-container")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "5px");
+
     var path = svg
       .selectAll("dot")
       .data(data)
@@ -144,10 +167,32 @@ function ReadCSV() {
       .attr("stroke-width", 2)
       .attr("stroke", "#000")
       .on("mouseover", function (d, i) {
+        tooltip.style("opacity", 1);
         d3.select(this).attr("stroke-width", 4);
       })
       .on("mouseout", function (d, i) {
+        tooltip.style("opacity", 0);
         d3.select(this).attr("stroke-width", 2);
+      })
+      .on("mousemove", function (d) {
+        tooltip
+          .html(
+            "<p>" + d[2] + "</p> <p>" + "(" + d[0] + ", " + d[1] + ")" + "</p> "
+          )
+          .style(
+            "left",
+            parseInt(d3.select(this).attr("cx")) +
+              document.getElementById("graph-container").offsetLeft +
+              TOOLTIP_X_OFFSET +
+              "px"
+          )
+          .style(
+            "top",
+            parseInt(d3.select(this).attr("cy")) +
+              document.getElementById("graph-container").offsetTop +
+              TOOLTIP_Y_OFFSET +
+              "px"
+          );
       })
       .on("click", function (d) {
         console.log("CLICKED,  " + d);
@@ -169,6 +214,10 @@ function HideDumpsite() {
 
 function ShowDumpsite() {
   svg.select("image").attr("display", "block");
+}
+
+function ToggleDumpsite(e) {
+  console.log("TEST");
 }
 
 function UpdateGraph() {

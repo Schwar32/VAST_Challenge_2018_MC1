@@ -13,10 +13,8 @@
         Hunter Schwartz, Ethan Miller, Evan Swider, Lorenzo Semprevivo, Shane
         Cleary
       </h2>
-    </div>
-    <div class="hero-container">
       <div class="filter-container" id="filter-container">
-        <h2 class="filters-header">Filters</h2>
+        <div class="bird-filter-container" id="bird-filter-container"></div>
         <div class="date-filter-container" id="date-filter-container">
           <input
             type="date"
@@ -34,11 +32,30 @@
             value="2020-01-01"
           />
         </div>
-        <div class="bird-filter-container" id="bird-filter-container"></div>
+        <div class="dumpsite-filter">
+          <input
+            type="checkbox"
+            id="dumpsite-checkbox"
+            name="dumpsite"
+            checked="true"
+          />
+          <label for="dumpsite-checkbox">Toggle Dumpsite</label><br />
+        </div>
       </div>
+    </div>
+
+    <div class="hero-container">
       <div class="graph-container" id="graph-container"></div>
       <div class="info-container">
         <h2 class="filters-header">Data Information</h2>
+
+        <audio controls>
+          <source
+            src="./Data/Audio/Bent-Beak-Riffraff-102830.wav"
+            type="audio/ogg"
+          />
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </div>
   </body>

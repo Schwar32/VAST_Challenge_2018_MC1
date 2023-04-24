@@ -19,7 +19,7 @@ svg {
 }
 
 .header-container {
-  padding: 1.5rem;
+  padding: 1rem;
   margin: 1em;
 }
 
@@ -28,16 +28,10 @@ svg {
   margin-bottom: 1em;
 }
 
-.hero-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 3em;
-  justify-content: center;
-  margin: 1em;
-}
-
 .filter-container {
-  outline: 1px solid black;
+  width: 80%;
+  margin: auto;
+  display: grid;
 }
 
 .filters-header {
@@ -48,21 +42,33 @@ svg {
 
 .date-filter-container {
   display: grid;
-  grid-template-columns: auto auto;
+  margin: auto;
+  width: 50%;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
 }
 
 .date-input {
-  padding: 1em;
   margin: 1em;
+  height: 3.5em;
+}
+
+.dumpsite-filter {
+  margin: auto;
+  padding: 1em;
 }
 
 .bird-filter-container {
   display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-auto-rows: 1fr;
+  margin: auto;
+  grid-template-columns: repeat(10, auto);
   gap: 0.25em;
-  width: 30em;
-  height: 20em;
+  width: 80%;
+  height: 10em;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  font-weight: bold;
 }
 
 .bird-filter {
@@ -79,13 +85,31 @@ svg {
 }
 
 .active {
-  background-color: green;
+  background-color: rgb(68, 191, 68);
 }
 
 .inactive {
-  background-color: grey;
+  background-color: rgb(169, 167, 167);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 3em;
+  justify-content: center;
+  margin: 1em;
 }
 
 .info-container {
   outline: 1px solid black;
+}
+
+.graph-container {
+}
+
+.tooltip {
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  font-size: 0.8em;
 }
