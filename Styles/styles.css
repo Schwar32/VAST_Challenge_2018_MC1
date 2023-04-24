@@ -102,6 +102,9 @@ svg {
 
 .info-container {
   outline: 1px solid black;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .graph-container {
@@ -112,4 +115,35 @@ svg {
   position: absolute;
   text-align: center;
   font-size: 0.8em;
+}
+.info-type-name{
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration:underline
+}
+.info-type-date{
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration:underline
+}
+.info-type-distance{
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration:underline
+}
+
+.info-sub-container{
+  padding-top: 1em;
+  width: 100%;
+  height: 5em;
+  text-align: center;
+}
+.image-placeholder{
+  background-color: lightgray;
+  height:256px;
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }

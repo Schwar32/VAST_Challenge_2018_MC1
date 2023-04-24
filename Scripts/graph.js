@@ -136,7 +136,6 @@ function ReadCSV() {
         Date.parse(d[i].Date),
       ]);
     }
-
     var tooltip = d3
       .select("#graph-container")
       .append("div")
@@ -194,8 +193,17 @@ function ReadCSV() {
               "px"
           );
       })
+      
       .on("click", function (d) {
         console.log("CLICKED,  " + d);
+        const X_COORD_DIFF = DUMPSITE_X-d[0];
+        const Y_COORD_DIFF = DUMPSITE_Y-d[1];
+        d3.selectAll('.content-name')
+          .text(d[2])
+        d3.selectAll('.content-date')
+          .text(d[4])
+        d3.selectAll('.content-distance')
+          .text(Math.round(Math.sqrt((Math.pow(X_COORD_DIFF,2))+(Math.pow(Y_COORD_DIFF,2)))))
       });
 
     var img = svg
@@ -206,6 +214,7 @@ function ReadCSV() {
       .attr("x", xScale(DUMPSITE_X) - DUMPSITE_SIZE / 2)
       .attr("y", yScale(DUMPSITE_Y) - DUMPSITE_SIZE / 2);
   });
+
 }
 
 function HideDumpsite() {
@@ -233,6 +242,7 @@ function UpdateGraph() {
     }
   });
 }
+
 
 SetupFilters();
 ReadCSV();
