@@ -138,6 +138,12 @@ svg {
   height: 5em;
   text-align: center;
 }
+.info-sub-container-scroll{
+  width: 90%;
+  height: 100%;
+  text-align: left !important;
+  overflow-y: auto;
+}
 .image-placeholder{
   background-color: lightgray;
   height:256px;

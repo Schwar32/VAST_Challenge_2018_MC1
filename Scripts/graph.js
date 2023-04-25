@@ -59,6 +59,27 @@ let birdFilters = {
   "Scrawny Jay": true,
   "Vermillion Trillian": true,
 };
+var birdNames = [
+  "Bent-beak Riffraff" ,
+  "Blue-collared Zipper" ,
+  "Bombadil" ,
+  "Broad-winged Jojo" ,
+  "Canadian Cootamum" ,
+  "Carries Champagne Pipit" ,
+  "Darkwing Sparrow" ,
+  "Eastern Corn Skeet" ,
+  "Green-tipped Scarlet Pipit" ,
+  "Lesser Birchbeere" ,
+  "Orange Pine Plover" ,
+  "Ordinary Snape" ,
+  "Pinkfinch" ,
+  "Purple Tooting Tout" ,
+  "Qax" ,
+  "Queenscoat" ,
+  "Rose-crested Blue Pipit" ,
+  "Scrawny Jay" ,
+  "Vermillion Trillian" ,
+]
 
 const TOOLTIP_X_OFFSET = 10;
 const TOOLTIP_Y_OFFSET = -45;
@@ -122,7 +143,9 @@ function SetupFilters() {
     container.append(btn);
   }
 }
-
+function calcDistance(x,y){
+    return Math.round(Math.sqrt((Math.pow(DUMPSITE_X - x,2))+(Math.pow(DUMPSITE_Y - y,2))))
+}
 function ReadCSV() {
   var data = [];
   d3.csv("../Data/AllBirdsv4.csv", function (d) {
@@ -134,6 +157,7 @@ function ReadCSV() {
         d[i].File_ID,
         d[i].Date,
         Date.parse(d[i].Date),
+        calcDistance(parseInt(d[i].X),parseInt(d[i].Y)),
       ]);
     }
     var tooltip = d3
@@ -230,17 +254,43 @@ function ToggleDumpsite(e) {
 }
 
 function UpdateGraph() {
+  d3.select(".info-sub-container-scroll").selectAll("div").remove()
+  var distances = [];
+  var averages_by_bird = [];
   svg.selectAll("circle").attr("display", function (d) {
     if (birdFilters[d[2]]) {
-      if (startFilter <= d[5] && endFilter >= d[5]) {
+      if (startFilter <= d[5] && endFilter >= d[5]) { 
+        distances.push({name: d[2], value : d[6]})
         return "block";
       } else {
         return "none";
       }
-    } else {
+    } else {  
       return "none";
     }
   });
+  var sum = 0;
+  var matches =0;
+  for(let i = 0; i < birdNames.length;i++){
+      for(let k = 0; k < distances.length; k++){
+        if(birdNames[i] == distances[k].name){
+          matches+=1;
+          sum+=distances[k].value;
+        }
+      }
+      if (isNaN(Math.round(sum/matches)) == false){
+        averages_by_bird.push({name:birdNames[i],value:Math.round(sum/matches)})
+      }
+      sum = 0;
+      matches = 0;
+  }
+  d3.select(".info-sub-container-scroll").selectAll("div")
+  .data(averages_by_bird)
+  .enter().append("div")
+  .text(function(d) {
+    var name_value_pair = '' + d.name + ': ' + d.value
+     return name_value_pair
+  })
 }
 
 
